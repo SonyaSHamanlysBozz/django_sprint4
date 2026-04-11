@@ -1,6 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Category
 from django.utils import timezone
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.views.generic import DeleteView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 User = get_user_model()
 
@@ -60,7 +65,15 @@ def category_posts(request, category_slug):
 
 def profile_view(request, username):
     user_profile = get_object_or_404(User, username=username)
-    context = [
+    context = {
         'profile':user_profile
-    ]
+    }
     return render(request, 'blog/profile.html', context)
+
+class CreatePostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    fields = ['title', 'text', 'location', 'category', 'image']
+    template_name = 'blog/create.html'
+    
+    def get_success_url(self):
+        return reverse_lazy('blog:profile', kwargs={'username': self.request.user.username})

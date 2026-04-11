@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-o+lmt^!my(=goo_j2ld8*e0st_8(0wp#_v6+j-jge=4wp6m^-5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -22,6 +22,8 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'django_bootstrap5',
+    'users.apps.UsersConfig',
     'core.apps.CoreConfig',
     'blog.apps.BlogConfig',
     'pages.apps.PagesConfig',
