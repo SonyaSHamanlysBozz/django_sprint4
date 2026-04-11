@@ -4,6 +4,7 @@ from core.models import PublishedModel
 
 from django.contrib.auth import get_user_model
 
+from django.utils import timezone
 
 class Location(PublishedModel):
     name = models.CharField('Название места', max_length=256)
@@ -38,6 +39,7 @@ class Post(PublishedModel):
     text = models.TextField('Текст')
     pub_date = models.DateTimeField(
         'Дата и время публикации',
+        default=timezone.now,
         help_text=(
             'Если установить дату и время в будущем — можно делать '
             'отложенные публикации.'
