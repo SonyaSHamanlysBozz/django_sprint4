@@ -45,7 +45,7 @@ class Post(PublishedModel):
             'отложенные публикации.'
         )
     )
-    author = author = models.ForeignKey(
+    author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         verbose_name='Автор публикации')
@@ -61,8 +61,21 @@ class Post(PublishedModel):
         null=True,
         blank=False,
         verbose_name='Категория')
-    image = models.ImageField('Фото', blank=True)
+    image = models.ImageField('Фото', upload_to='blog_images', blank=True)
 
     class Meta:
         verbose_name = 'публикация'
         verbose_name_plural = 'Публикации'
+
+class Comments(models.Model):
+    text = models.TextField('Комментарий')
+    post = models.ForeignKey(
+        Post, 
+        on_delete=models.CASCADE,
+        related_name='comments',
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ('created_at',) 
