@@ -6,7 +6,6 @@ User = get_user_model()
 
 class PostForm(forms.ModelForm):
     pub_date = forms.DateTimeField(
-        widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         help_text='Выберите дату и время публикации'
     )
     class Meta:

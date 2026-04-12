@@ -148,5 +148,8 @@ dmypy.json
 # папки со статикой и медиа
 media/
 
-sent_emails/
 
+# Sent emails (file-based email backend)
+sent_emails/
+*.eml
+*.txt

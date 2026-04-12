@@ -94,7 +94,7 @@ def profile_view(request, username):
 
 class CreatePostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'text', 'location', 'category', 'image']
+    fields = ['title', 'text', 'location', 'category', 'image', 'pub_date',]
     template_name = 'blog/create.html'
 
     def form_valid(self, form):
