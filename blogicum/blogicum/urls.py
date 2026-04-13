@@ -5,9 +5,9 @@ from django.views.generic.edit import CreateView
 from django.conf import settings
 from django.conf.urls.static import static
 
-headler404 = 'core.views.page_not_found'
-headler403 = 'core.views.csrf_failure'
-headler500 = 'core.views.custom_500'
+handler404 = 'core.views.page_not_found'
+handler403 = 'core.views.csrf_failure'
+handler500 = 'core.views.custom_500'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
