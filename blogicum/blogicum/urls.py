@@ -1,9 +1,11 @@
+# blogicum/urls.py
 from django.contrib import admin
 from django.urls import path, include, reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
 from django.conf import settings
 from django.conf.urls.static import static
+from blog.views import custom_logout
 
 handler404 = 'core.views.page_not_found'
 handler403 = 'core.views.csrf_failure'
@@ -13,7 +15,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls', namespace='blog')),
     path('pages/', include('pages.urls', namespace='pages')),
-    path('auth/', include('django.contrib.auth.urls')),
+    path('auth/logout/', custom_logout, name='logout'),
+    path('auth/', include('django.contrib.auth.urls')),    
     path(
         'auth/registration/', 
         CreateView.as_view(
@@ -22,6 +25,5 @@ urlpatterns = [
             success_url=reverse_lazy('blog:index'),
         ),
         name='registration',
-    ),
-    
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+        ),
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

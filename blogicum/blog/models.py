@@ -62,10 +62,13 @@ class Post(PublishedModel):
         blank=False,
         verbose_name='Категория')
     image = models.ImageField('Фото', upload_to='blog_images', blank=True)
+    objects = models.Manager()
+    all_objects = models.Manager()
 
     class Meta:
         verbose_name = 'публикация'
         verbose_name_plural = 'Публикации'
+        ordering = ('-pub_date',)
 
 class Comments(models.Model):
     text = models.TextField('Комментарий')
